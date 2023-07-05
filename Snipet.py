@@ -6,17 +6,17 @@ import pandas as pd
 # import time
 import os
 
-error1 = np.array([12.49-9.8, -0.17, -1.45])  # Done
-error2 = np.array([15.4-9.8, 1.82, 0.55])  # Done
-error3 = np.array([9.78-9.8, -0.35, -1.05])  # Done
-error4 = np.array([9.97-9.8, -0.14, -0.88])  # Done
-error5 = np.array([10.45-9.8, -0.26, -2.02])  # Done
+# error1 = np.array([12.49-9.8, -0.17, -1.45])  # Done
+# error2 = np.array([15.4-9.8, 1.82, 0.55])  # Done
+# error3 = np.array([9.78-9.8, -0.35, -1.05])  # Done
+# error4 = np.array([9.97-9.8, -0.14, -0.88])  # Done
+# error5 = np.array([10.45-9.8, -0.26, -2.02])  # Done
 
-# error1 = np.array([0,0,0])
-# error2 = np.array([0,0,0])
-# error3 = np.array([0,0,0])
-# error4 = np.array([0,0,0])
-# error5 = np.array([0,0,0])
+error1 = np.array([0,0,0])
+error2 = np.array([0,0,0])
+error3 = np.array([0,0,0])
+error4 = np.array([0,0,0])
+error5 = np.array([0,0,0])
 
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
@@ -55,12 +55,12 @@ row_list = []
 column_names = []
 
 # Define column names
-for i in range(5):
-    column_names.append("Angle" + str(i + 1))
-for i in range(5):
-    column_names.append("X" + str(i + 1))
-    column_names.append("Y" + str(i + 1))
+# for i in range(1):
+#     column_names.append("Angle" + str(i + 1))
+for i in range(1):
     column_names.append("Z" + str(i + 1))
+    column_names.append("Y" + str(i + 1))
+    column_names.append("X" + str(i + 1))
 # start_time = time.time()
 # time_limit = 60*int(input("Insert time (minutes): "))
 
@@ -115,7 +115,7 @@ def move_arrow(root, direction1,
     # ang_row = [ang1]
 
     ang_row = [
-        ang1,
+        # ang1,
         # ang2, ang3, ang4, ang5,
         direction1[0],direction1[1],direction1[2],
         # direction2[0],direction2[1],direction2[2],
@@ -166,7 +166,7 @@ def export():
     #     filename = f"Test_{str(count)}_{str(int(time_limit))}sec_{str(start_time)}.xlsx"
     #     df.to_excel(filename, header=column_names)
     filename = f"Test_{str(count)}.xlsx"
-    # df.to_excel(filename, header=column_names)
+    df.to_excel(filename, header=column_names)
 
 
 try:
@@ -185,8 +185,8 @@ try:
     count += 1
 
     # Write the new count back to the file
-    # with open(execution_count_file, 'w') as f:
-    #     f.write(str(count))
+    with open(execution_count_file, 'w') as f:
+        f.write(str(count))
 
     def update(i):
         data = ser.readline().decode()[0:][:-2].split(",")  # 2-1-0/5-4-3/8-7-6
@@ -246,7 +246,7 @@ try:
                 # Angle2, Angle3, Angle4, Angle5
                 ]
 
-    ani = animation.FuncAnimation(fig, update, frames=None, interval=10, repeat=False, blit=True)
+    ani = animation.FuncAnimation(fig, update, frames=500, interval=10, repeat=False, blit=True)
     plt.show()
     export()
     # if time.time() - start_time >= time_limit:
@@ -255,3 +255,4 @@ try:
 
 except KeyboardInterrupt or InterruptedError:
     export()
+
